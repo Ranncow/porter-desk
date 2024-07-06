@@ -82,9 +82,9 @@ jobs:
             mv ./${{env.PRJ}} ./${{env.PRJ}}.old
             mv ./${{env.PRJ}}.new ./${{env.PRJ}}
             cd "./${{env.PRJ}}/"
-#            npm run db-export
-#            npm run db-init
-#            npm run db-import
+            #            npm run db-export
+            #            npm run db-init
+            #            npm run db-import
             cd ..
             sudo systemctl start ${{ env.SERVICE }}
             ls -lh ./${{env.PRJ}}/
