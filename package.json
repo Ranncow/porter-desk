@@ -1,0 +1,42 @@
+{
+  "name": "@ranncow/porter-desk",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Porter: the customer app.",
+  "homepage": "https://github.com/ranncow/porter-desk/",
+  "bugs": {
+    "url": "https://github.com/ranncow/porter-desk/issues",
+    "email": "alex@flancer32.com"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Alex Gusev",
+    "email": "alex@flancer64.com",
+    "url": "https://github.com/flancer64"
+  },
+  "repository": "github:ranncow/porter-desk",
+  "scripts": {
+    "help": "node ./bin/tequila.mjs -h",
+    "start": "node ./bin/tequila.mjs web-server-start",
+    "stop": "node ./bin/tequila.mjs web-server-stop",
+    "version": "node ./bin/tequila.mjs core-version"
+  },
+  "dependencies": {
+    "@ranncow/porter-base": "github:ranncow/porter-base",
+    "@teqfw/core": "github:teqfw/core",
+    "@teqfw/db": "github:teqfw/db",
+    "@teqfw/di": "github:teqfw/di",
+    "@teqfw/email": "github:teqfw/email",
+    "@teqfw/i18n": "github:teqfw/i18n",
+    "@teqfw/ui-quasar": "github:teqfw/ui-quasar",
+    "@teqfw/vue": "github:teqfw/vue",
+    "@teqfw/web": "github:teqfw/web",
+    "@teqfw/web-api": "github:teqfw/web-api",
+    "@teqfw/web-source-installer": "github:teqfw/web-source-installer",
+    "pg": "^8.11.3",
+    "quasar": "2.14.5"
+  },
+  "devDependencies": {
+    "mocha": "latest"
+  }
+}

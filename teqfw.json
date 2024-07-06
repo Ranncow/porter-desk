@@ -1,0 +1,8 @@
+{
+  "@teqfw/di": {
+    "autoload": {
+      "ns": "Porter_Desk",
+      "path": "./src"
+    }
+  }
+}
