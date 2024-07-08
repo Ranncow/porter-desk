@@ -12,14 +12,12 @@ const NS = 'Porter_Desk_Front_Ui_Lib_ActiveOrders';
  * TeqFW DI factory function to get dependencies for the object.
  *
  * @param {Porter_Desk_Front_Defaults} DEF
- * @param {Porter_Desk_Front_Ui_Widget_App_Title} wgTitle
  *
  * @returns {Porter_Desk_Front_Ui_Lib_ActiveOrders.vueCompTmpl}
  */
 export default function (
     {
         Porter_Desk_Front_Defaults$: DEF,
-        Porter_Desk_Front_Ui_Widget_App_Title$: wgTitle,
     }
 ) {
     // VARS
