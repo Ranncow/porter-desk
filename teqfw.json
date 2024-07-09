@@ -3,6 +3,17 @@
     "autoload": {
       "ns": "Porter_Desk",
       "path": "./src"
+    },
+    "replaces": {
+      "back": {
+        "Porter_Base_Back_Web_Api_App_Refresh": "Porter_Desk_Back_Di_Replace_Porter_Base_Back_Web_Api_App_Refresh"
+      }
     }
+  },
+  "@teqfw/web-api": {
+    "services": [
+      "Porter_Base_Back_Web_Api_App_Refresh",
+      "Porter_Desk_Back_Web_Api_Order_Active_List"
+    ]
   }
 }

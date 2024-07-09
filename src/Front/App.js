@@ -8,6 +8,7 @@ export default class Porter_Desk_Front_App {
      * @param {TeqFw_Di_Api_Container} container
      * @param {Porter_Desk_Front_Defaults} DEF
      * @param {TeqFw_Core_Shared_Logger_Base} loggerBase
+     * @param {TeqFw_Core_Shared_Api_Logger_Transport} loggerTransport
      * @param {TeqFw_Vue_Front_Ext_Vue} extVue
      * @param {TeqFw_Ui_Quasar_Front_Ext} extQuasar
      * @param {TeqFw_Web_Front_Mod_Config} modCfg
@@ -20,6 +21,7 @@ export default class Porter_Desk_Front_App {
             container,
             Porter_Desk_Front_Defaults$: DEF,
             TeqFw_Core_Shared_Logger_Base$: loggerBase,
+            TeqFw_Core_Shared_Api_Logger_Transport$: loggerTransport,
             TeqFw_Vue_Front_Ext_Vue: extVue,
             TeqFw_Ui_Quasar_Front_Ext: extQuasar,
             TeqFw_Web_Front_Mod_Config$: modCfg,
@@ -53,6 +55,10 @@ export default class Porter_Desk_Front_App {
              */
             function createPrintout(fn) {
                 return (typeof fn === 'function') ? fn : (msg) => console.log(msg);
+            }
+
+            function initLogger() {
+                loggerBase.setTransport(loggerTransport);
             }
 
             /**
@@ -112,17 +118,20 @@ export default class Porter_Desk_Front_App {
             let res = false;
             try {
                 _print = createPrintout(fnPrintout);
-                _print(`Initializing the frontend application...`);
+                _print(`Creating the frontend application...`);
                 // create root vue component
                 _app = Vue.createApp(uiMain);
+                _print(`Initializing global UI components...`);
                 initUiComponents(_app);
-                _print(`Global Vue components are added. Initializing Quasar UI...`);
+                _print(`Initializing Quasar UI...`);
                 initQuasarUi(_app, quasar);
-                _print(`Quasar UI is initialized. Loading the front app configuration...`);
+                _print(`Loading the front app configuration...`);
                 await modCfg.init();
-                _print(`The app config is loaded. Initializing the Vue Router...`);
+                _print(`Initializing the logger...`);
+                initLogger();
+                _print(`Initializing the Vue Router...`);
                 initRouter(_app, DEF, container);
-                _print(`The Vue Router is initialized. The front app initialization is complete.`);
+                _print(`The front app initialization is complete.`);
                 res = true;
             } catch (e) {
                 loggerBase.error(this.constructor.name, e);
