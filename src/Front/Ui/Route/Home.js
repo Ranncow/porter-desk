@@ -5,6 +5,7 @@
  */
 // MODULE'S VARS
 const NS = 'Porter_Desk_Front_Ui_Route_Home';
+const REF_CHECK_IN = 'checkIn';
 
 // MODULE'S FUNCTIONS
 
@@ -13,6 +14,7 @@ const NS = 'Porter_Desk_Front_Ui_Route_Home';
  *
  * @param {Porter_Desk_Front_Defaults} DEF
  * @param {Porter_Desk_Front_Ui_Widget_App_Title} wgTitle
+ * @param {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn.vueCompTmpl} uiFormCheckIn
  *
  * @returns {Porter_Desk_Front_Ui_Route_Home.vueCompTmpl}
  */
@@ -20,6 +22,7 @@ export default function (
     {
         Porter_Desk_Front_Defaults$: DEF,
         Porter_Desk_Front_Ui_Widget_App_Title$: wgTitle,
+        Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn$: uiFormCheckIn,
     }
 ) {
     // VARS
@@ -34,7 +37,7 @@ export default function (
             <div class="col text-center q-pa-md column q-gutter-md">
                 <div>ROOMS</div>
                 <q-btn>View Active Rooms</q-btn>
-                <q-btn>Check-In</q-btn>
+                <q-btn label="Check-In" @click="onCheckIn"/>
                 <q-btn>Check-Out</q-btn>
                 <q-btn>Activate Account for Worker</q-btn>
             </div>
@@ -52,8 +55,8 @@ export default function (
                 <q-btn>Create Order</q-btn>
             </div> 
         </div>
-        
-    </div> 
+    </div>
+    <ui-form-check-in ref="${REF_CHECK_IN}"/> 
 </layout-main>
 `;
 
@@ -68,14 +71,21 @@ export default function (
         teq: {package: DEF.SHARED.NAME},
         name: NS,
         template,
-        components: {},
+        components: {uiFormCheckIn},
         data() {
-            return {   };
+            return {};
         },
-        computed: {   },
-        methods: {   },
+        computed: {},
+        methods: {
+            onCheckIn() {
+                /** @type {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn.IUi} */
+                const dlg = this.$refs[REF_CHECK_IN];
+                dlg.show();
+            },
+        },
         async mounted() {
             wgTitle.setTitle('Porter Desk');
+            this.onCheckIn();
         },
     };
 }

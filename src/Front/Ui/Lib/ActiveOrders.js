@@ -96,7 +96,10 @@ export default function (
 
             // MAIN
             this.ifLoading = true;
-            this.items.push(...await modActive.list());
+            const all = await modActive.list();
+            all.sort((a, b) => b.dateCreated - a.dateCreated);
+            this.items.length = 0;
+            this.items.push(...all);
             this.ifLoading = false;
             // open SSE to get updates
             sse.setHandlers({REFRESH: hndlRefresh});
