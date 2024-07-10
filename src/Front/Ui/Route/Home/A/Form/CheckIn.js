@@ -36,6 +36,8 @@ class IUi {
  * @param {Porter_Base_Shared_Util_Date} date
  * @param {Porter_Base_Shared_Util_Format} format
  * @param {Porter_Base_Front_Mod_Notify} modNotify
+ * @param {Porter_Desk_Front_Mod_Room} modRoom
+ * @param {typeof Porter_Base_Shared_Enum_Room_State} STATE
  *
  * @returns {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn.vueCompTmpl}
  */
@@ -45,6 +47,8 @@ export default function (
         Porter_Base_Shared_Util_Date$: date,
         Porter_Base_Shared_Util_Format$: format,
         Porter_Base_Front_Mod_Notify$: modNotify,
+        Porter_Desk_Front_Mod_Room$: modRoom,
+        Porter_Base_Shared_Enum_Room_State$: STATE,
     }
 ) {
     // VARS
@@ -59,12 +63,15 @@ export default function (
 
         <!-- The customer data -->
         <q-card-section class="column justify-center items-center q-gutter-xs">
-            <q-input v-model="fldRoom"
-                     autofocus
-                     dense
-                     label="Room"
-                     outlined
-            />
+            <q-select v-model="fldRoom"
+                      :options="optsRoom"
+                      dense
+                      emit-value
+                      label="Room"
+                      map-options
+                      outlined
+                      style="width: 200px"
+            />            
             <div class="row q-gutter-xs justify-between">
                 <q-input v-model="fldDateIn"
                          dense
@@ -142,6 +149,7 @@ export default function (
                 fldTimeIn: '12:00',
                 fldTimeOut: '12:00',
                 ifLoading: false,
+                optsRoom: [],
             };
         },
         computed: {},
@@ -168,6 +176,16 @@ export default function (
                 ui.show();
             },
         },
-        async mounted() {},
+        async mounted() {
+            const items = await modRoom.list();
+            this.fldRoom = undefined;
+            this.optsRoom.length = 0;
+            for (const item of items) {
+                if (item.state === STATE.READY) {
+                    this.optsRoom.push({value: item.id, label: item.number});
+                    if (!this.fldRoom) this.fldRoom = item.id; // select the first ready room
+                }
+            }
+        },
     };
 }
