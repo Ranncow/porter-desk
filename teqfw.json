@@ -10,6 +10,11 @@
       }
     }
   },
+  "@teqfw/core": {
+    "commands": [
+      "Porter_Desk_Back_Cli_Data_Init"
+    ]
+  },
   "@teqfw/web-api": {
     "services": [
       "Porter_Base_Back_Web_Api_App_Refresh",
