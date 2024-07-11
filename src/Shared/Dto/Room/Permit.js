@@ -13,8 +13,10 @@ const ATTR = {
     DATE_IN: 'dateIn',
     DATE_OUT: 'dateOut',
     EMAIL: 'email',
+    ID: 'id',
     NAME: 'name',
     PIN: 'pin',
+    ROOM_NUM: 'roomNum',
     ROOM_REF: 'roomRef',
     UUID: 'uuid',
 };
@@ -46,6 +48,10 @@ class Dto {
      */
     email;
     /**
+     * @type {number}
+     */
+    id;
+    /**
      * The name of the visitor.
      * @type {string}
      */
@@ -56,7 +62,12 @@ class Dto {
      */
     pin;
     /**
-     * The related room.
+     * The number of the related room.
+     * @type {number}
+     */
+    roomNum;
+    /**
+     * The reference to related room.
      * @type {number}
      */
     roomRef;
@@ -73,12 +84,10 @@ class Dto {
 export default class Porter_Desk_Shared_Dto_Room_Permit {
     /**
      * @param {TeqFw_Core_Shared_Util_Cast} cast
-     * @param {typeof Porter_Base_Shared_Enum_Room_State} STATE
      */
     constructor(
         {
             TeqFw_Core_Shared_Util_Cast$: cast,
-            Porter_Base_Shared_Enum_Room_State$: STATE,
         }
     ) {
         // INSTANCE METHODS
@@ -94,8 +103,10 @@ export default class Porter_Desk_Shared_Dto_Room_Permit {
             res.dateIn = cast.date(data?.dateIn);
             res.dateOut = cast.date(data?.dateOut);
             res.email = cast.string(data?.email);
+            res.id = cast.int(data?.id);
             res.name = cast.string(data?.name);
             res.pin = cast.int(data?.pin);
+            res.roomNum = cast.int(data?.roomNum);
             res.roomRef = cast.int(data?.roomRef);
             res.uuid = cast.string(data?.uuid);
             return res;

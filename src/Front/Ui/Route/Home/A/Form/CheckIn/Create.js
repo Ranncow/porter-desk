@@ -1,10 +1,11 @@
 /**
- * The base screen for the application's homepage.
+ * The form to get the data to create a registration permit.
  *
- * @namespace Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn
+ * @namespace Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Create
  */
 // MODULE'S VARS
-const NS = 'Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn';
+const NS = 'Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Create';
+const EVT_SUCCESS = 'onSuccess';
 const REF_SELF = 'self';
 
 // MODULE'S INTERFACES
@@ -13,7 +14,7 @@ const REF_SELF = 'self';
  * These the methods are available to call for the components.
  * @interface
  * @mixin
- * @memberOf Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn
+ * @memberOf Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Create
  */
 class IUi {
     /**
@@ -40,7 +41,7 @@ class IUi {
  * @param {Porter_Desk_Front_Mod_Room_Permit} modPermit
  * @param {typeof Porter_Base_Shared_Enum_Room_State} STATE
  *
- * @returns {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn.vueCompTmpl}
+ * @returns {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Create.vueCompTmpl}
  */
 export default function (
     {
@@ -63,7 +64,6 @@ export default function (
             <q-btn dense flat icon="close" v-close-popup/>
         </q-bar>
 
-        <!-- The customer data -->
         <q-card-section class="column justify-center items-center q-gutter-xs">
             <q-select v-model="fldRoom"
                       :options="optsRoom"
@@ -115,11 +115,6 @@ export default function (
             />
         </q-card-section>
 
-        <!-- The list of rewards -->
-        <q-card-section class="column justify-left items-left q-gutter-xs">
-            <q-radio v-for="one of items" dense v-model="selected" :val="one.bid" :label="one.name" />            
-        </q-card-section>
-
         <q-card-actions align="center">
             <q-btn outline label="OK" @click="onOk"/>
         </q-card-actions>
@@ -134,7 +129,7 @@ export default function (
      * Template to create new component instances using Vue.
      *
      * @const {Object} vueCompTmpl
-     * @memberOf Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn
+     * @memberOf Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Create
      */
     return {
         teq: {package: DEF.SHARED.NAME},
@@ -156,7 +151,7 @@ export default function (
         },
         computed: {},
         /**
-         * @mixes Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn.IUi
+         * @mixes Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Create.IUi
          */
         methods: {
             hide() {
@@ -179,18 +174,20 @@ export default function (
                 dto.email = this.fldEmail;
                 dto.name = this.fldName;
                 dto.roomRef = this.fldRoom;
-                debugger
                 const rs = await modPermit.create({entity: dto});
                 this.ifLoading = false;
                 this.hide();
-                if (rs.uuid) modNotify.positive(`New permit is created.`);
-                else modNotify.negative(`New permit is not created.`);
+                if (rs.uuid) {
+                    modNotify.positive(`New permit is created.`);
+                    this.$emit(EVT_SUCCESS, rs);
+                } else modNotify.negative(`New permit is not created.`);
             },
             async show() {
                 const ui = this.$refs[REF_SELF];
                 ui.show();
             },
         },
+        emits: [EVT_SUCCESS],
         async mounted() {
             const items = await modRoom.list();
             this.fldRoom = undefined;

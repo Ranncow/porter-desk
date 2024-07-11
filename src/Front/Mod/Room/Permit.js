@@ -7,6 +7,7 @@ export default class Porter_Desk_Front_Mod_Room_Permit {
      * @param {TeqFw_Core_Shared_Api_Logger} logger -  instance
      * @param {TeqFw_Web_Api_Front_Web_Connect} api
      * @param {Porter_Desk_Shared_Web_Api_Room_Permit_Create} endCreate
+     * @param {Porter_Desk_Shared_Web_Api_Room_Permit_Read} endRead
      * @param {Porter_Desk_Shared_Dto_Room_Permit} dtoPermit
      */
     constructor(
@@ -14,6 +15,7 @@ export default class Porter_Desk_Front_Mod_Room_Permit {
             TeqFw_Core_Shared_Api_Logger$$: logger,
             TeqFw_Web_Api_Front_Web_Connect$: api,
             Porter_Desk_Shared_Web_Api_Room_Permit_Create$: endCreate,
+            Porter_Desk_Shared_Web_Api_Room_Permit_Read$: endRead,
             Porter_Desk_Shared_Dto_Room_Permit$: dtoPermit,
         }
     ) {
@@ -38,6 +40,24 @@ export default class Porter_Desk_Front_Mod_Room_Permit {
                 // noinspection JSValidateTypes
                 /** @type {Porter_Desk_Shared_Web_Api_Room_Permit_Create.Response} */
                 const rs = await api.send(req, endCreate);
+                return rs?.entity;
+            } catch (e) {
+                logger.exception(e);
+            }
+            return undefined;
+        };
+
+        /**
+         * @param {number} id
+         * @return {Promise<Porter_Desk_Shared_Dto_Room_Permit.Dto>}
+         */
+        this.read = async function ({id}) {
+            try {
+                const req = endRead.createReq();
+                req.id = id;
+                // noinspection JSValidateTypes
+                /** @type {Porter_Desk_Shared_Web_Api_Room_Permit_Read.Response} */
+                const rs = await api.send(req, endRead);
                 return rs?.entity;
             } catch (e) {
                 logger.exception(e);

@@ -5,7 +5,8 @@
  */
 // MODULE'S VARS
 const NS = 'Porter_Desk_Front_Ui_Route_Home';
-const REF_CHECK_IN = 'checkIn';
+const REF_CHECK_IN_CREATE = 'checkInCreate';
+const REF_CHECK_IN_PREVIEW = 'checkInPreview';
 
 // MODULE'S FUNCTIONS
 
@@ -14,7 +15,8 @@ const REF_CHECK_IN = 'checkIn';
  *
  * @param {Porter_Desk_Front_Defaults} DEF
  * @param {Porter_Desk_Front_Ui_Widget_App_Title} wgTitle
- * @param {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn.vueCompTmpl} uiFormCheckIn
+ * @param {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Create.vueCompTmpl} uiFormCheckInCreate
+ * @param {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Preview.vueCompTmpl} uiFormCheckInPreview
  *
  * @returns {Porter_Desk_Front_Ui_Route_Home.vueCompTmpl}
  */
@@ -22,7 +24,8 @@ export default function (
     {
         Porter_Desk_Front_Defaults$: DEF,
         Porter_Desk_Front_Ui_Widget_App_Title$: wgTitle,
-        Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn$: uiFormCheckIn,
+        Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Create$: uiFormCheckInCreate,
+        Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Preview$: uiFormCheckInPreview,
     }
 ) {
     // VARS
@@ -56,7 +59,8 @@ export default function (
             </div> 
         </div>
     </div>
-    <ui-form-check-in ref="${REF_CHECK_IN}"/> 
+    <ui-form-check-in-create ref="${REF_CHECK_IN_CREATE}" @onSuccess="doCheckInCreateSuccess"/> 
+    <ui-form-check-in-preview ref="${REF_CHECK_IN_PREVIEW}"/> 
 </layout-main>
 `;
 
@@ -71,21 +75,29 @@ export default function (
         teq: {package: DEF.SHARED.NAME},
         name: NS,
         template,
-        components: {uiFormCheckIn},
+        components: {uiFormCheckInCreate, uiFormCheckInPreview},
         data() {
             return {};
         },
         computed: {},
         methods: {
+            /**
+             * Display the CheckIn Preview dialog for newly created permit.
+             * @param {Porter_Desk_Shared_Dto_Room_Permit.Dto} dto
+             */
+            doCheckInCreateSuccess(dto) {
+                /** @type {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Preview.IUi} */
+                const dlg = this.$refs[REF_CHECK_IN_PREVIEW];
+                dlg.show({id: dto?.id});
+            },
             onCheckIn() {
-                /** @type {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn.IUi} */
-                const dlg = this.$refs[REF_CHECK_IN];
+                /** @type {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn_Create.IUi} */
+                const dlg = this.$refs[REF_CHECK_IN_CREATE];
                 dlg.show();
             },
         },
         async mounted() {
             wgTitle.setTitle('Porter Desk');
-            this.onCheckIn();
         },
     };
 }

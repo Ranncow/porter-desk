@@ -20,7 +20,8 @@
       "Porter_Base_Back_Web_Api_App_Refresh",
       "Porter_Desk_Back_Web_Api_Order_Active_List",
       "Porter_Desk_Back_Web_Api_Room_List",
-      "Porter_Desk_Back_Web_Api_Room_Permit_Create"
+      "Porter_Desk_Back_Web_Api_Room_Permit_Create",
+      "Porter_Desk_Back_Web_Api_Room_Permit_Read"
     ]
   }
 }

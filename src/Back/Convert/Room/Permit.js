@@ -19,16 +19,19 @@ export default class Porter_Desk_Back_Convert_Room_Permit {
 
         /**
          * @param {Porter_Base_Back_Store_RDb_Schema_Room_Permit.Dto} dbPermit
+         * @param {Porter_Base_Back_Store_RDb_Schema_Room.Dto} dbRoom
          * @returns {Porter_Desk_Shared_Dto_Room_Permit.Dto}
          */
-        this.rdb2share = function ({dbPermit}) {
+        this.rdb2share = function ({dbPermit, dbRoom}) {
             const res = shared.createDto();
             res.dateCreated = cast.date(dbPermit?.date_created);
             res.dateIn = cast.date(dbPermit?.date_in);
             res.dateOut = cast.date(dbPermit?.date_out);
             res.email = cast.string(dbPermit?.email);
+            res.id = cast.int(dbPermit?.id);
             res.name = cast.string(dbPermit?.name);
             res.pin = cast.int(dbPermit?.pin);
+            res.roomNum = cast.int(dbRoom?.number);
             res.roomRef = cast.int(dbPermit?.room_ref);
             res.uuid = cast.string(dbPermit?.uuid);
             return res;
@@ -51,7 +54,7 @@ export default class Porter_Desk_Back_Convert_Room_Permit {
             dbPermit.date_in = cast.date(permit?.dateIn);
             dbPermit.date_out = cast.date(permit?.dateOut);
             dbPermit.email = cast.string(permit?.email);
-            // dbPermit.id = cast.string(permit?.);
+            dbPermit.id = cast.int(permit?.id);
             dbPermit.name = cast.string(permit?.name);
             dbPermit.pin = cast.int(permit?.pin);
             dbPermit.room_ref = cast.int(permit?.roomRef);
