@@ -37,6 +37,7 @@ class IUi {
  * @param {Porter_Base_Shared_Util_Format} format
  * @param {Porter_Base_Front_Mod_Notify} modNotify
  * @param {Porter_Desk_Front_Mod_Room} modRoom
+ * @param {Porter_Desk_Front_Mod_Room_Permit} modPermit
  * @param {typeof Porter_Base_Shared_Enum_Room_State} STATE
  *
  * @returns {Porter_Desk_Front_Ui_Route_Home_A_Form_CheckIn.vueCompTmpl}
@@ -48,6 +49,7 @@ export default function (
         Porter_Base_Shared_Util_Format$: format,
         Porter_Base_Front_Mod_Notify$: modNotify,
         Porter_Desk_Front_Mod_Room$: modRoom,
+        Porter_Desk_Front_Mod_Room_Permit$: modPermit,
         Porter_Base_Shared_Enum_Room_State$: STATE,
     }
 ) {
@@ -162,14 +164,27 @@ export default function (
                 ui.hide();
             },
             async onOk() {
+                // FUNCS
+                function getDate(date, time) {
+                    const txt = `${date} ${time}`;
+                    return new Date(txt);
+                }
+
+                // MAIN
                 // emulate form processing
                 this.ifLoading = true;
-                await new Promise((resolve) => {
-                    setTimeout(resolve, 500);
-                });
+                const dto = modPermit.composeEntity();
+                dto.dateIn = getDate(this.fldDateIn, this.fldTimeIn);
+                dto.dateOut = getDate(this.fldDateOut, this.fldTimeOut);
+                dto.email = this.fldEmail;
+                dto.name = this.fldName;
+                dto.roomRef = this.fldRoom;
+                debugger
+                const rs = await modPermit.create({entity: dto});
                 this.ifLoading = false;
                 this.hide();
-                modNotify.positive(`New permit is created.`);
+                if (rs.uuid) modNotify.positive(`New permit is created.`);
+                else modNotify.negative(`New permit is not created.`);
             },
             async show() {
                 const ui = this.$refs[REF_SELF];
