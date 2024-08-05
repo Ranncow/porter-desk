@@ -75,3 +75,9 @@ body {
 .box-container, .q-pa-xl.box-container, .q-gutter-md {
   flex-wrap: nowrap !important;
 }
+
+.header-left {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 12px;
+}
