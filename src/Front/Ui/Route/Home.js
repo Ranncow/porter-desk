@@ -33,29 +33,48 @@ export default function (
 <layout-main>
     <div class="" style="height: calc(100vh - var(--size-header));">
         <q-toolbar class="q-pr-xs">
-            <div>ACTIVE CONSOLE</div>
+            <div class="header-left">ACTIVE CONSOLE</div>
             <q-space/> 
         </q-toolbar>
-        <div class="q-pa-xl row items-start">
+        <div class="q-pa-xl box-container">
             <div class="col text-center q-pa-md column q-gutter-md">
-                <div>ROOMS</div>
-                <q-btn>View Active Rooms</q-btn>
-                <q-btn label="Check-In" @click="onCheckIn"/>
-                <q-btn>Check-Out</q-btn>
-                <q-btn>Activate Account for Worker</q-btn>
+                <div class="title-container">
+                    <q-img
+                    src="rooms.ico"
+                    alt="Rooms"
+                    style="width: 54px; height: 44px; margin-right: 8px;"
+                    />
+                    <div>Rooms</div>
+                </div>
+                <q-btn label="Check-In a guest" @click="onCheckIn"/>
+                <q-btn>Check-Out a guest</q-btn>
+                <q-btn>View active rooms</q-btn>
             </div>
             <div class="col text-center q-pa-md column q-gutter-md">
-                <div>KITCHEN</div>
-                <q-btn>Incoming Orders</q-btn>
-                <q-btn>Active Orders</q-btn>
-                <q-btn>Order History</q-btn>
-                <q-btn>Menu Editor</q-btn>
+                <div class="title-container">
+                    <q-img
+                    src="kitchen.ico"
+                    alt="Kitchen"
+                    style="width: 54px; height: 44px; margin-right: 8px;"
+                    />
+                    <div>Kitchen</div>
+                </div>
+                <q-btn>Create order</q-btn>
+                <q-btn>Active orders</q-btn>
+                <q-btn>Order history</q-btn>
+                <q-btn>Edit menu</q-btn>
+            </div>
+            <div class="col text-center q-pa-md column q-gutter-md">
+                <div class="title-container">
+                    <q-img
+                    src="cleaning.ico"
+                    alt="Cleaning"
+                    style="width: 54px; height: 44px; margin-right: 8px;"
+                    />
+                    <div>Cleaning</div>
+                </div>
                 <q-btn>Create Order</q-btn>
-            </div>
-            <div class="col text-center q-pa-md column q-gutter-md">
-                <div>CLEANING</div>
                 <q-btn>View/Manage Schedule</q-btn>
-                <q-btn>Create Order</q-btn>
             </div> 
         </div>
     </div>

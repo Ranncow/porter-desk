@@ -1,0 +1,83 @@
+body {
+  background-color: #f0f0f0;
+}
+
+.box-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+/* Title container styles */
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+/* Title styles */
+.title-container div {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-left: 8px;
+  text-align: left;
+}
+
+.box-container .column {
+  border: 1px solid lightgray;
+  border-radius: 12px;
+  padding: 16px;
+  background-color: white;
+  margin: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%; /* Added to ensure full width */
+  box-sizing: border-box;
+}
+
+.box-container .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.q-btn::before,
+.q-btn::after {
+  box-shadow: none !important;
+}
+
+/* Button styles */
+.box-container .column .q-btn {
+  width: calc(100% - 32px);
+  max-width: none;
+  margin-bottom: 8px;
+  text-align: left;
+  justify-content: flex-start;
+  padding-left: 16px;
+  box-shadow: none;
+}
+
+.box-container .column .q-btn .q-btn__content {
+  width: 100%;
+  text-align: left; 
+  justify-content: flex-start;
+}
+
+.box-container .column .q-btn {
+  width: 100% !important; /* Ensures the button takes full width */
+  margin: 8px !important; /* Ensures consistent margin */
+  padding: 8px !important; /* Ensures consistent padding */
+}
+
+.box-container, .q-pa-xl.box-container, .q-gutter-md {
+  flex-wrap: nowrap !important;
+}
+
+.header-left {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 12px;
+}
