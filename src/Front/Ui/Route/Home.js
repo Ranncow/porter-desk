@@ -40,7 +40,7 @@ export default function (
             <div class="col text-center q-pa-md column q-gutter-md">
                 <div class="title-container">
                     <q-img
-                    src="rooms.ico"
+                    src="./img/rooms.ico"
                     alt="Rooms"
                     style="width: 54px; height: 44px; margin-right: 8px;"
                     />
@@ -53,7 +53,7 @@ export default function (
             <div class="col text-center q-pa-md column q-gutter-md">
                 <div class="title-container">
                     <q-img
-                    src="kitchen.ico"
+                    src="./img/kitchen.ico"
                     alt="Kitchen"
                     style="width: 54px; height: 44px; margin-right: 8px;"
                     />
@@ -67,7 +67,7 @@ export default function (
             <div class="col text-center q-pa-md column q-gutter-md">
                 <div class="title-container">
                     <q-img
-                    src="cleaning.ico"
+                    src="./img/cleaning.ico"
                     alt="Cleaning"
                     style="width: 54px; height: 44px; margin-right: 8px;"
                     />

@@ -100,6 +100,9 @@ export default function (
             all.sort((a, b) => b.dateCreated - a.dateCreated);
             this.items.length = 0;
             this.items.push(...all);
+            // BEGIN: tmp for design updates
+            this.items.push({uuid:'001', type:'type1', dateCreated: new Date()})
+            // END: tmp for design updates
             this.ifLoading = false;
             // open SSE to get updates
             sse.setHandlers({REFRESH: hndlRefresh});
